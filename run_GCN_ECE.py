@@ -32,30 +32,12 @@ adj        = pkl.load(open("contig.graph",'rb'))
 labels     = pkl.load(open("contig.o_label",'rb'))
 features   = pkl.load(open("contig.feature",'rb'))
 idx_test   = pkl.load(open("contig.dict",'rb'))
-#idx_test    = pkl.load(open("contig.testid",'rb'))
-#a = random.sample(range(1, len(features)), 200)
-#a = random.sample(idx_test, 100)
-#a = [labels[item] for item in idx_test]
-#Counter(a).most_common()
-#large = [49]
-#a = [item for item in idx_test if labels[item] in large]
-#idx_test = a
+
 
 
 idx_test = random.sample(range(len(features)), 200)
-#tmp = [labels[item] for item in idx_test]
 
 
-
-p_label_small = [4, 5]
-c_label_small = [2, 4, 12, 5]
-o_label_small = [2, 4, 7, 10, 17, 22, 23, 26]
-f_label_small = [18, 34, 46, 3, 47, 22, 57, 54, 17, 44, 26, 20, 30, 10, 27, 2, 53, 37, 58, 13, 21, 39]
-g_label_small = [9, 93, 86, 78, 6, 77, 90, 55, 4, 16, 40, 50, 22, 75, 
-                0, 92, 19, 71, 33, 100, 52, 88, 45, 46, 73, 58, 97, 
-                25, 3, 79, 48, 20, 10, 96, 87, 12, 2, 27, 67, 41, 81, 
-                56, 74, 89, 83, 54, 53, 42, 21, 59, 29, 101, 60, 70, 
-                62, 35, 26, 18, 28, 7, 68]
 a = idx_test
 idx_test = [item for item in a if labels[item] not in g_label_small]
 len(idx_test)
