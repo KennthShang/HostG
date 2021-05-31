@@ -119,3 +119,15 @@ for label in node_label:
         node_int_label.append(-1)
         test_id.append(idx)
     idx+=1
+
+
+################################################################################
+############################  Dump inputs for GCN  #############################
+################################################################################
+
+
+adj = nx.adjacency_matrix(G)
+pkl.dump(adj, open("HostGB/add_real_relation/contig.graph", "wb" ))
+pkl.dump(sorted_feature, open("HostGB/add_real_relation/contig.feature", "wb" ))
+pkl.dump(node_int_label, open("HostGB/add_real_relation/contig.p_label", "wb" ))
+pkl.dump(test_id, open("HostGB/add_real_relation/contig.p_label", "wb" ))
