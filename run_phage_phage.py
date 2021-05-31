@@ -124,7 +124,7 @@ for file in file_list:
         _ = SeqIO.write(protein_record, file_out_fnn+file, "fasta")
 
 all_protein_f = out_fn + "all_proteins.fa"
-_ = subprocess.check_call("cat {0} {1} > {2}".format(file_out_fnn+"*", "database/protein.fasta", all_protein_f), shell=True)
+_ = subprocess.check_call("cat {0} {1} > {2}".format(file_out_fnn+"*", "dataset/protein.fasta", all_protein_f), shell=True)
 
 
 ################################################################################
@@ -154,12 +154,15 @@ except:
 
 # Generating gene-to-genome.csv: protein_id, contig_id, keywords
 blastp = pd.read_csv(database_abc_fp, sep=' ', names=["contig", "ref", "e-value"])
-protein_id = sorted(list(set(blastp["contig"].values)))
+protein_id = sorted(list(set(blastp["contig"].values)|set(blastp["ref"].values)))
 contig_protein = [item for item in protein_id if "cherry" == item.split("_")[0]]
 contig_id = [item.rsplit("_", 1)[0] for item in contig_protein]
 description = ["hypothetical protein" for item in contig_protein]
 gene2genome = pd.DataFrame({"protein_id": contig_protein, "contig_id": contig_id ,"keywords": description})
 gene2genome.to_csv(out_fn+"contig_gene_to_genome.csv", index=None)
+
+
+_ = subprocess.check_call("cat dataset/database_gene_to_genome.csv {0}contig_gene_to_genome.csv > {1}gene_to_genome.csv".format(out_fn, out_fn), shell=True)
 
 # Counting for the mapped proteins
 #mapped_record = []
@@ -174,7 +177,7 @@ gene2genome.to_csv(out_fn+"contig_gene_to_genome.csv", index=None)
 
 
 # Combining the gene-to-genomes files
-_ = subprocess.check_call("cat database/database_gene_to_genome.csv {0}contig_gene_to_genome.csv > {1}gene_to_genome.csv".format(out_fn, out_fn), shell=True)
+
 
 
 
@@ -284,5 +287,5 @@ with open(out_fn+"intermediate.ntw") as file_in:
 graph = "phage_phage.ntw"
 with open(graph, 'w') as file_out:
     for node1 in G.nodes():
-        for node2 in G.edges(node):
+        for _,node2 in G.edges(node1):
             file_out.write(node1+","+node2)
