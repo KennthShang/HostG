@@ -1,7 +1,6 @@
 import os
 import sys
 import Bio
-import logging
 import argparse
 import subprocess
 import scipy as sp
@@ -11,13 +10,12 @@ import pickle as pkl
 import networkx as nx
 import scipy.stats as stats
 import scipy.sparse as sparse
+import utils
 from Bio import SeqIO
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
-from cluster import make_diamond_db, run_diamond
-from cluster import make_protein_clusters_mcl, load_mcl_clusters, build_clusters
-from cluster import build_pc_matrices, to_clusterer, create_network
-
+from utils import make_protein_clusters_mcl, load_mcl_clusters, build_clusters
+from utils import build_pc_matrices, to_clusterer, create_network
 
 # Defined folder
 out_fn = "out/"
@@ -84,7 +82,7 @@ with open("name_list.csv",'w') as list_out:
     list_out.write("contig_name,idx\n")
     for file_n in file_list:
         for record in SeqIO.parse(contig_in+file_n, "fasta"):
-            name = str(old_file_id) + "_" + str(contig_id)
+            name = "cherry_"+str(old_file_id) + "_" + str(contig_id)
             contig_id += 1
             list_out.write(record.id + "," + name + "\n")
             _ = SeqIO.write(record, contig_out+name+".fasta", "fasta")
@@ -107,7 +105,7 @@ file_list = os.listdir(file_in_fn)
 for file in file_list:
     old_file_name = file.rsplit(".", 1)[0]
     contig_id = int(old_file_name.split("_")[-1])
-    label_id = int(old_file_name.split("_")[0])
+    label_id = int(old_file_name.split("_")[1])
     for record in SeqIO.parse(file_in_fn+file, "fasta"):
         protein_record = []
         contig = str(record.seq)
@@ -121,12 +119,12 @@ for file in file_list:
         frame6 = return_protien(rev_contig[2:])
         proteins = np.concatenate([frame1, frame2, frame3, frame4, frame5, frame6])
         for i in range(len(proteins)):
-            rec = SeqRecord(Seq(proteins[i]), id=str(label_id)+ "_" + str(contig_id) + "_" + str(i), description="")
+            rec = SeqRecord(Seq(proteins[i]), id="cherry_"+str(label_id)+ "_" + str(contig_id) + "_" + str(i), description="")
             protein_record.append(rec)
         _ = SeqIO.write(protein_record, file_out_fnn+file, "fasta")
 
-all_protein_f = out_fn+"all_translate_proteins.fa"
-_ = subprocess.check_call("cat {0} > {1}".format(file_out_fnn+"*", all_protein_f), shell=True)
+all_protein_f = out_fn + "all_proteins.fa"
+_ = subprocess.check_call("cat {0} {1} > {2}".format(file_out_fnn+"*", "database/protein.fasta", all_protein_f), shell=True)
 
 
 ################################################################################
@@ -136,46 +134,47 @@ _ = subprocess.check_call("cat {0} > {1}".format(file_out_fnn+"*", all_protein_f
 print("\n\n" + "{:-^80}".format("Diamond BLASTp"))
 print("Creating Diamond database and running Diamond...")
 
+try:
+    make_diamond_cmd = 'diamond makedb --threads 8 --in out/all_proteins.fa -d out/database.dmnd'
+    print("Creating Diamond database...")
+    _ = subprocess.check_call(make_diamond_cmd, shell=True)
+    
+    diamond_cmd = 'diamond blastp --threads 8 --sensitive -d out/database.dmnd -q out/all_proteins.fa -o out/database.self-diamond.tab'
+    print("Running Diamond...")
+    _ = subprocess.check_call(diamond_cmd, shell=True)
+    diamond_out_fp = "out/database.self-diamond.tab"
+    database_abc_fp = "out/database.self-diamond.tab.abc"
+    _ = subprocess.check_call("awk '$1!=$2 {{print $1,$2,$11}}' {0} > {1}".format(diamond_out_fp, database_abc_fp), shell=True)
+except:
+    print("create database failed")
+    exit(1)
 
 
 
-proteins_aa_fp = all_protein_f
-db_fp = "database/database.dmnd"
-diamond_out_fnn = '{}.diamond.tab'.format(os.path.basename(proteins_aa_fp).rsplit('.', 1)[0])
-diamond_out_fnp = os.path.join(out_fn, diamond_out_fnn)
-# Create database
-_ = make_diamond_db(8)
-# Run BLASTP
-similarity_fp = run_diamond(proteins_aa_fp, db_fp, 8, diamond_out_fnp)
-
-# capture the query, referencde, e-value from diamond output
-contig_abc_fp = out_fn + diamond_out_fnn + ".abc"
-abc_fp = out_fn+"merged.abc"
-_ = subprocess.check_call("awk '$1!=$2 {{print $1,$2,$11}}' {0} > {1}".format(diamond_out_fnp, contig_abc_fp), shell=True)
-_ = subprocess.check_call("cat database/database.self-diamond.tab.abc {0} > {1}".format(contig_abc_fp, abc_fp), shell=True)
 
 # Generating gene-to-genome.csv: protein_id, contig_id, keywords
-blastp = pd.read_csv(contig_abc_fp, sep=' ', names=["contig", "ref", "e-value"])
+blastp = pd.read_csv(database_abc_fp, sep=' ', names=["contig", "ref", "e-value"])
 protein_id = sorted(list(set(blastp["contig"].values)))
-contig_id = [item.rsplit("_", 1)[0] for item in protein_id]
-description = ["hypothetical protein" for item in protein_id]
-gene2genome = pd.DataFrame({"protein_id": protein_id, "contig_id": contig_id ,"keywords": description})
+contig_protein = [item for item in protein_id if "cherry" == item.split("_")[0]]
+contig_id = [item.rsplit("_", 1)[0] for item in contig_protein]
+description = ["hypothetical protein" for item in contig_protein]
+gene2genome = pd.DataFrame({"protein_id": contig_protein, "contig_id": contig_id ,"keywords": description})
 gene2genome.to_csv(out_fn+"contig_gene_to_genome.csv", index=None)
 
 # Counting for the mapped proteins
-mapped_record = []
-for record in SeqIO.parse(all_protein_f, "fasta"):
-    if record.id in protein_id:
-        mapped_record.append(record)
+#mapped_record = []
+#for record in SeqIO.parse(all_protein_f, "fasta"):
+#    if record.id in protein_id:
+#        mapped_record.append(record)
         
 # Save the mapped proteins
-mapped_fp = out_fn+"mapped_protein.fa"
-with open(mapped_fp, 'w') as file_out:
-    _ = SeqIO.write(mapped_record, file_out, "fasta")
+#mapped_fp = out_fn+"mapped_protein.fa"
+#with open(mapped_fp, 'w') as file_out:
+#    _ = SeqIO.write(mapped_record, file_out, "fasta")
 
 
 # Combining the gene-to-genomes files
-_ = subprocess.check_call("cat database/database_gene_to_genomes.csv {0}contig_gene_to_genome.csv > {1}gene_to_genome.csv".format(out_fn, out_fn), shell=True)
+_ = subprocess.check_call("cat database/database_gene_to_genome.csv {0}contig_gene_to_genome.csv > {1}gene_to_genome.csv".format(out_fn, out_fn), shell=True)
 
 
 
@@ -190,7 +189,7 @@ gene2genome_df = pd.read_csv(gene2genome_fp, sep=',', header=0)
 
 # Parameters for MCL
 pc_overlap, pc_penalty, pc_haircut, pc_inflation = 0.8, 2.0, 0.1, 2.0
-pcs_fp = make_protein_clusters_mcl(abc_fp, out_fn, pc_inflation)
+pcs_fp = make_protein_clusters_mcl(database_abc_fp, out_fn, pc_inflation)
 print("Building the cluster and profiles (this may take some time...)")
 
 

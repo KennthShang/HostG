@@ -8,6 +8,7 @@ import pickle as pkl
 import networkx as nx
 import scipy.stats as stats
 import scipy.sparse as sparse
+import subprocess
 from Bio import SeqIO
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
@@ -179,7 +180,7 @@ def create_network(matrix, singletons, thres=1, max_sig=1000):
     else:
         raise ValueError("No edge in the similarity network !") 
     return S
-    
+
 def masked_ECE(out, train_label, train_mask):
     device = torch.device('cuda')
     m = nn.Softmax(dim=1)
