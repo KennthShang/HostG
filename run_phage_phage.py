@@ -83,9 +83,10 @@ with open("name_list.csv",'w') as list_out:
     for file_n in file_list:
         for record in SeqIO.parse(contig_in+file_n, "fasta"):
             name = "cherry_"+str(old_file_id) + "_" + str(contig_id)
-            contig_id += 1
-            list_out.write(record.id + "," + name + "\n")
+            _ = list_out.write(record.id + "," + name + "\n")
+            record.id = "cherry_"+str(old_file_id) + "_" + str(contig_id)
             _ = SeqIO.write(record, contig_out+name+".fasta", "fasta")
+            contig_id += 1
         old_file_id += 1
 
 
@@ -270,7 +271,7 @@ with open(out_fn+"intermediate.ntw") as file_in:
         G.add_edge(node1, node2, weight = 1)
 
 
-graph = "phage_phage.ntw"
+graph = "out/phage_phage.ntw"
 with open(graph, 'w') as file_out:
     for node1 in G.nodes():
         for _,node2 in G.edges(node1):

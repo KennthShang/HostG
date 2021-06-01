@@ -52,9 +52,9 @@ with open("name_list.csv",'w') as list_out:
     for file_n in file_list:
         for record in SeqIO.parse(contig_in+file_n, "fasta"):
             name = "cherry_" + str(old_file_id) + "_" + str(contig_id)
-            contig_id += 1
-            _ = list_out.write(record.id + "," + name)
+            record.id = "cherry_"+str(old_file_id) + "_" + str(contig_id)
             _ = SeqIO.write(record, contig_out+name+".fasta", "fasta")
+            contig_id += 1
         old_file_id += 1
 
 try:

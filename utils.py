@@ -192,52 +192,97 @@ def masked_ECE(out, train_label, train_mask):
     pred = torch.argmax(out, 1)
     # calculate box
     for i in range(len(prob)):
-        if train_mask[i] == True:
-            if prob[i] > 0.8:
+        if test_mask[i] == True:
+            if prob[i] > 0.9:
+                try:
+                    prob_box[9].append(prob[i])
+                    pred_box[9].append(pred[i])
+                    label_box[9].append(test_label[i])
+                except:
+                    prob_box[9] = [prob[i]]
+                    pred_box[9] = [pred[i]]
+                    label_box[9]= [test_label[i]]
+            elif prob[i] > 0.8:
+                try:
+                    prob_box[8].append(prob[i])
+                    pred_box[8].append(pred[i])
+                    label_box[8].append(test_label[i])
+                except:
+                    prob_box[8] = [prob[i]]
+                    pred_box[8] = [pred[i]]
+                    label_box[8]= [test_label[i]]
+            elif prob[i] > 0.7:
+                try:
+                    prob_box[7].append(prob[i])
+                    pred_box[7].append(pred[i])
+                    label_box[7].append(test_label[i])
+                except:
+                    prob_box[7] = [prob[i]]
+                    pred_box[7] = [pred[i]]
+                    label_box[7]= [test_label[i]]
+            elif prob[i] > 0.6:
+                try:
+                    prob_box[6].append(prob[i])
+                    pred_box[6].append(pred[i])
+                    label_box[6].append(test_label[i])
+                except:
+                    prob_box[6] = [prob[i]]
+                    pred_box[6] = [pred[i]]
+                    label_box[6]= [test_label[i]]
+            elif prob[i] > 0.5:
+                try:
+                    prob_box[5].append(prob[i])
+                    pred_box[5].append(pred[i])
+                    label_box[5].append(test_label[i])
+                except:
+                    prob_box[5] = [prob[i]]
+                    pred_box[5] = [pred[i]]
+                    label_box[5]= [test_label[i]]
+            elif prob[i] > 0.4:
                 try:
                     prob_box[4].append(prob[i])
                     pred_box[4].append(pred[i])
-                    label_box[4].append(train_label[i])
+                    label_box[4].append(test_label[i])
                 except:
                     prob_box[4] = [prob[i]]
                     pred_box[4] = [pred[i]]
-                    label_box[4]= [train_label[i]]
-            elif prob[i] > 0.6:
+                    label_box[4]= [test_label[i]]
+            elif prob[i] > 0.3:
                 try:
                     prob_box[3].append(prob[i])
                     pred_box[3].append(pred[i])
-                    label_box[3].append(train_label[i])
+                    label_box[3].append(test_label[i])
                 except:
                     prob_box[3] = [prob[i]]
                     pred_box[3] = [pred[i]]
-                    label_box[3]= [train_label[i]]
-            elif prob[i] > 0.4:
+                    label_box[3]= [test_label[i]]
+            elif prob[i] > 0.2:
                 try:
                     prob_box[2].append(prob[i])
                     pred_box[2].append(pred[i])
-                    label_box[2].append(train_label[i])
+                    label_box[2].append(test_label[i])
                 except:
                     prob_box[2] = [prob[i]]
                     pred_box[2] = [pred[i]]
-                    label_box[2]= [train_label[i]]
-            elif prob[i] > 0.2:
+                    label_box[2]= [test_label[i]]
+            elif prob[i] > 0.1:
                 try:
                     prob_box[1].append(prob[i])
                     pred_box[1].append(pred[i])
-                    label_box[1].append(train_label[i])
+                    label_box[1].append(test_label[i])
                 except:
                     prob_box[1] = [prob[i]]
                     pred_box[1] = [pred[i]]
-                    label_box[1]= [train_label[i]]
+                    label_box[1]= [test_label[i]]
             else:
                 try:
                     prob_box[0].append(prob[i])
                     pred_box[0].append(pred[i])
-                    label_box[0].append(train_label[i])
+                    label_box[0].append(test_label[i])
                 except:
                     prob_box[0] = [prob[i]]
                     pred_box[0] = [pred[i]]
-                    label_box[0]= [train_label[i]]
+                    label_box[0]= [test_label[i]]
     # calculate ECE
     ECE = 0
     for key in label_box.keys():
