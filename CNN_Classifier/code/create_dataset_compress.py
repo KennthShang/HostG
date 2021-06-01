@@ -19,17 +19,6 @@ if __name__ == '__main__':
         if read.reshape(-1).shape[0] == 1998:
             read = read.reshape(1, 1998)
         
-        cnt = int(name.split(".")[0])
-        label = np.zeros(len(read)) + cnt
-        
-        read = np.c_[read, label]
-
-
         data.append(read)
-        #cnt += 1
-
-        #print(name + " finished !")
         np.savetxt("dataset/"+name, read, delimiter=",", fmt='%d')
-    #data = np.concatenate(data, axis=0)
-     
-    #np.savetxt("dataset/val.csv", data, delimiter=",", fmt='%d')
+

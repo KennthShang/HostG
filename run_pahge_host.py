@@ -80,9 +80,9 @@ for file in tab_file_list:
             tmp = line.split('\t')
             phage_id = tmp[0]
             try:
-                bacteria2phage[bacteria_id].append(phage_name)
+                bacteria2phage[bacteria_id].append(phage_id)
             except:
-                bacteria2phage[bacteria_id] = [phage_name]
+                bacteria2phage[bacteria_id] = [phage_id]
 
 # De-duplication
 for key in bacteria2phage:
@@ -90,7 +90,7 @@ for key in bacteria2phage:
 
 
 # Save the phage-host graph
-with open("phage_host.ntw") as file_out:
+with open("phage_host.ntw", 'w') as file_out:
     for bacteria in bacteria2phage:
         for phage in bacteria2phage[bacteria]:
-            file_out.write(bacteria + "," + phage + "\n")
+            _ = file_out.write(bacteria + "," + phage + "\n")

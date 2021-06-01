@@ -51,9 +51,9 @@ with open("name_list.csv",'w') as list_out:
     list_out.write("contig_name,idx\n")
     for file_n in file_list:
         for record in SeqIO.parse(contig_in+file_n, "fasta"):
-            name = str(old_file_id) + "_" + str(contig_id)
+            name = "cherry_" + str(old_file_id) + "_" + str(contig_id)
             contig_id += 1
-            list_out.write(record.id + "," + name)
+            _ = list_out.write(record.id + "," + name)
             _ = SeqIO.write(record, contig_out+name+".fasta", "fasta")
         old_file_id += 1
 
@@ -128,14 +128,13 @@ compress_label = []
 file_list = os.listdir("dataset")
 file_list = sorted(file_list)
 
+contig2id = {name.rsplit('.', 1)[0]:idx for idx, name in enumerate(file_list)}
+
 for name in file_list:
     val = np.genfromtxt('dataset/'+name, delimiter=',')
-    val_label = val[:, -1]
-    val_feature = val[:, :-1]
-    label = int(name.split(".")[0])
+    val_feature = val
     # comvert format
     val_feature = torch.from_numpy(val_feature).long()
-    val_label = torch.from_numpy(val_label).float()
     val_feature = torch_embeds(val_feature)
     val_feature = val_feature.reshape(len(val_feature), 1, 1998, 100)
     # prediction
@@ -147,13 +146,11 @@ for name in file_list:
         with torch.no_grad():
             out = cnn(val_feature)
         out = out.detach().numpy()
-
-    out = np.sum(out, axis=0)
+    out = np.sum(out, axis=0)/len(out)
     compress_feature.append(out)
-    compress_label.append(label)
 
 
 
 compress_feature = np.array(compress_feature)
 pkl.dump(compress_feature, open("../Cyber_data/contig.F", 'wb'))
-_ = os.system("bash clean_all_script.sh")
+pkl.dump(contig2id, open("../Cyber_data/contig2id.dict", 'wb'))
