@@ -164,20 +164,6 @@ gene2genome.to_csv(out_fn+"contig_gene_to_genome.csv", index=None)
 
 _ = subprocess.check_call("cat dataset/database_gene_to_genome.csv {0}contig_gene_to_genome.csv > {1}gene_to_genome.csv".format(out_fn, out_fn), shell=True)
 
-# Counting for the mapped proteins
-#mapped_record = []
-#for record in SeqIO.parse(all_protein_f, "fasta"):
-#    if record.id in protein_id:
-#        mapped_record.append(record)
-        
-# Save the mapped proteins
-#mapped_fp = out_fn+"mapped_protein.fa"
-#with open(mapped_fp, 'w') as file_out:
-#    _ = SeqIO.write(mapped_record, file_out, "fasta")
-
-
-# Combining the gene-to-genomes files
-
 
 
 
@@ -288,4 +274,4 @@ graph = "phage_phage.ntw"
 with open(graph, 'w') as file_out:
     for node1 in G.nodes():
         for _,node2 in G.edges(node1):
-            file_out.write(node1+","+node2)
+            _ = file_out.write(node1+","+node2+"\n")

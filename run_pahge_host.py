@@ -18,10 +18,8 @@ from Bio.SeqRecord import SeqRecord
 
 # Defined folder
 bacteria_in = "bacteria/"
-phage_in = "phages/"
-contig_in = "contigs/"
-blast_database_out = "blast_db"
-blast_tab_out = "blast_tab"
+blast_database_out = "blast_db/"
+blast_tab_out = "blast_tab/"
 Knowledge_graph = "Cyber_data/"
 
 ################################################################################
@@ -47,7 +45,7 @@ check_folder(blast_tab_out)
 
 
 #  combine phage file 
-_ = subprocess.check_call("cat {0}/* {1}/* > query.fa".format(phage_in, contig_in), shell=True)
+_ = subprocess.check_call("cat dataset/nucl.fasta single_contig/* > out/query.fa", shell=True)
 
 
 
@@ -61,7 +59,7 @@ for genome in genome_list:
     make_blast_cmd = 'makeblastdb -in '+ bacteria_in + genome +' -dbtype nucl -parse_seqids -out '+ blast_database_out + genome.split(".")[0]
     print("Creating blast database...")
     _ = subprocess.check_call(make_blast_cmd, shell=True)
-    blast_cmd = 'blastn -query query.fa -db bacteria_db/'+genome.split(".")[0]+' -outfmt 6 -out '+ blast_tab_out + genome.split(".")[0]+'.tab -num_threads 8'
+    blast_cmd = 'blastn -query out/query.fa -db blast_db/'+genome.split(".")[0]+' -outfmt 6 -out '+ blast_tab_out + genome.split(".")[0]+'.tab -num_threads 8'
     print("Running blastn...")
     _ = subprocess.check_call(blast_cmd, shell=True)
 
@@ -95,4 +93,4 @@ for key in bacteria2phage:
 with open("phage_host.ntw") as file_out:
     for bacteria in bacteria2phage:
         for phage in bacteria2phage[bacteria]:
-            file_out.write(bacteria + "," + phage)
+            file_out.write(bacteria + "," + phage + "\n")
