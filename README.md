@@ -12,6 +12,8 @@ HostG is a GCN based model, which can learn the species masking feature via deep
 * Networkx
 * Pandas
 * [Diamond](https://github.com/bbuchfink/diamond)
+* BLAST
+* MCL
 
 All these packages can be installed using Anaconda.
 
@@ -22,7 +24,7 @@ If you want to use the gpu to accelerate the program:
 ## An easiler way to install
 We recommend you to install all the package with [Anaconda](https://anaconda.org/)
 
-After cloning this respository, you can use anaconda to install the **HostG.yaml**. This will install all packages you need with gpu mode (make sure you have installed cuda on your system).
+After cloning this respository, you can use anaconda to install the **HostG.yaml**. This will install all packages you need with gpu mode (make sure you have installed cuda on your system to use the gpu version. Othervise, it will run with cpu version).
 
 # Usage (example)
 Here we present an example to show how to run PhaGCN. We support a file named "contigs.fa" in the Github folder and it contain contigs simulated from E. coli phage. The only command that you need to run is `python run_Speed_up.py --contigs test_contigs.fa --len 8000 --t [confidence]`. 
