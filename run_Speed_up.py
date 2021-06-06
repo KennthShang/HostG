@@ -14,7 +14,7 @@ import re
 #####################################################################
 
 parser = argparse.ArgumentParser(description='manual to this script')
-parser.add_argument('--contigs', type=str, default = 'test_contigs.fasta')
+parser.add_argument('--contigs', type=str, default = 'test_contigs.fa')
 parser.add_argument('--len', type=int, default=8000)
 parser.add_argument('--gpus', type=int, default = 0)
 parser.add_argument('--t', type=float, default=0.0)

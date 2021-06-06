@@ -55,7 +55,6 @@ def GCN(taxa):
     y_test = np.zeros(labels.shape)
 
 
-    idx_train = np.array([i for i in range(len(labels))])
     idx_train = np.array([i for i in range(len(labels)) if i not in idx_test])
 
 

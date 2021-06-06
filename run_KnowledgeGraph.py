@@ -27,6 +27,22 @@ phage_host_ntw = "out/phage_host.ntw"
 parser = argparse.ArgumentParser(description='manual to this script')
 inputs = parser.parse_args()
 
+def check_folder(file_name):
+    if not os.path.exists(file_name):
+        _ = os.makedirs(file_name)
+    else:
+        print("folder {0} exist... cleaning dictionary".format(file_name))
+        if os.listdir(file_name):
+            try:
+                _ = subprocess.check_call("rm -rf {0}".format(file_name), shell=True)
+                _ = os.makedirs(file_name)
+                print("Dictionary cleaned")
+            except:
+                print("Cannot clean your folder... permission denied")
+                exit(1)
+
+check_folder("GCN_data")
+
 ################################################################################
 ############################  Edge construction  ###############################
 ################################################################################

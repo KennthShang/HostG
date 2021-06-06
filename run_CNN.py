@@ -136,7 +136,10 @@ for name in file_list:
     # comvert format
     val_feature = torch.from_numpy(val_feature).long()
     val_feature = torch_embeds(val_feature)
-    val_feature = val_feature.reshape(len(val_feature), 1, 1998, 100)
+    try:
+        val_feature = val_feature.reshape(len(val_feature), 1, 1998, 100)
+    except:
+        val_feature = val_feature.reshape(1, 1, 1998, 100)
     # prediction
     if torch.cuda.is_available():
         with torch.no_grad():
