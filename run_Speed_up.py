@@ -52,7 +52,7 @@ def special_match(strg, search=re.compile(r'[^ACGT]').search):
 cnt = 0
 file_id = 0
 records = []
-for record in SeqIO.parse(intpus.contigs, 'fasta'):
+for record in SeqIO.parse(inputs.contigs, 'fasta'):
     if cnt !=0 and cnt%1000 == 0:
         SeqIO.write(records, "Split_files/contig_"+str(file_id)+".fasta","fasta") 
         records = []
