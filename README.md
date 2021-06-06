@@ -32,7 +32,9 @@ There are three parameters for the program: 1. `--contigs` is the path of your c
 The output file is **final_prediction.csv**. There are several column in this csv file: "contig_name, median_file_name, [taxa]".
 
 # Database Extension
-Since the limitation of storage on GitHub, we only upload part of bacteria genomes in *bacteria* folder. If you want to extend the database, please follow the same format and upload your genomes into to *bacteria* folder. Also you need to update the **label.csv** in the *dataset* folder according to your new genomes. 
+Since the limitation of storage on GitHub, we only upload part of bacteria genomes in *bacteria* folder. Information about these bacteria can be found in **bacteria.csv** in the *dataset* folder.
+
+If you want to extend the database, please follow the same format and upload your genomes into to *bacteria* folder. Also you need to update the **label.csv** in the *dataset* folder according to your new genomes. 
 
 # Notice
 If you want to use HostG, you need to take care of:
