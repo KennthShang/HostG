@@ -104,7 +104,7 @@ for i in range(file_id):
         out = subprocess.check_call(cmd, shell=True)
         continue
 
-    cmd = "python KnowledgeGraph.py"
+    cmd = "python run_KnowledgeGraph.py"
     try:
         out = subprocess.check_call(cmd, shell=True)
     except:
