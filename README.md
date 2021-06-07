@@ -27,9 +27,9 @@ We recommend you to install all the package with [Anaconda](https://anaconda.org
 After cloning this respository, you can use anaconda to install the **HostG.yaml**. This will install all packages you need with gpu mode (make sure you have installed cuda on your system to use the gpu version. Othervise, it will run with cpu version).
 
 # Usage (example)
-Here we present an example to show how to run PhaGCN. We support a file named "contigs.fa" in the Github folder and it contain contigs simulated from E. coli phage. The only command that you need to run is `python run_Speed_up.py --contigs test_contigs.fa --len 8000 --t [confidence]`. 
+Here we present an example to show how to run PhaGCN. We support a file named "contigs.fa" in the Github folder and it contain contigs simulated from E. coli phage. The only command that you need to run is `python run_Speed_up.py --contigs test_contigs.fa --len 8000 --t [confidence(SoftMax value)]`. 
 
-There are three parameters for the program: 1. `--contigs` is the path of your contigs file. 2. `--len` is the length of the contigs you want to predict. The default length is 8000bp. 3. `--t [confidence]`. This will output predictions only the confidence is larger than the threshold.  Both `--len` and '--t' are cutoffs decided by users. If you prefer higher accuracy, you can specify bigger values for len and t so that only the contigs longer than len and have confidence > t will be output.
+There are three parameters for the program: 1. `--contigs` is the path of your contigs file. 2. `--len` is the length of the contigs you want to predict. The default length is 8000bp. 3. `--t `. This will output predictions only the confidence (SoftMax value) is larger than the threshold.  Both `--len` and '--t' are cutoffs decided by users. As shown in the paper, if you prefer higher accuracy, you can specify bigger values for len and t so that only the contigs longer than len and have confidence > t will be output.
 
 The output file is **final_prediction.csv**. There are several column in this csv file: "contig_name, median_file_name, [taxa]".
 
@@ -44,7 +44,7 @@ If you want to use HostG, you need to take care of:
 
 
 # References
-The paper was submitted to *Bioinformatics* and the pre-print version is avaliable on https://arxiv.org/abs/2105.13570
+The pre-print version is avaliable on https://arxiv.org/abs/2105.13570
 
 
 ## Contact
