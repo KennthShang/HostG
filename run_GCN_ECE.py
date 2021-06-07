@@ -22,19 +22,13 @@ import random
 ###############################  Input Params  #################################
 ################################################################################
 
-parser = argparse.ArgumentParser(description='manual to this script')
-parser.add_argument('--gpus', type=int, default = 0)
-parser.add_argument('--t', type=float, default=0.0)
-inputs = parser.parse_args()
-
-
 seed = 123
 np.random.seed(seed)
 torch.random.manual_seed(seed)
 
 
 if torch.cuda.is_available():
-    torch.cuda.set_device(inputs.gpus)
+    torch.cuda.set_device(args.gpus)
 else:
     print("Running with cpu")
 
@@ -194,7 +188,7 @@ def GCN(taxa):
                     _ = f_out.write(node + "," + int2label[labels[idx]] + "\n")
                     #print(node + "," + int2label[labels[idx]])
                 else:
-                    if max(softmax(out[idx])) > inputs.t:
+                    if max(softmax(out[idx])) > args.t:
                         _ = f_out.write(node + "," + int2label[pred[idx]] + "\n")
                         #print(node + "," + int2label[pred[idx]])
 

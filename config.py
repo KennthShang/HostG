@@ -10,6 +10,8 @@ args.add_argument('--dropout', type=float, default=0)
 args.add_argument('--weight_decay', type=float, default=5e-4)
 #args.add_argument('--early_stopping', type=int, default=10)
 args.add_argument('--max_degree', type=int, default=3)
+args.add_argument('--gpus', type=int, default = 0)
+args.add_argument('--t', type=float, default=0.0)
 
 
 args = args.parse_args()
