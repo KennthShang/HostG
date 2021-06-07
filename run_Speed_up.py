@@ -113,7 +113,7 @@ for i in range(file_id):
         out = subprocess.check_call(cmd, shell=True)
         continue
 
-    cmd = "python run_GCN_ECE.py --t "  + inputs.t + " --gpus " + inputs.gpus
+    cmd = "python run_GCN_ECE.py --t "  + str(inputs.t) + " --gpus " + str(inputs.gpus)
     try:
         out = subprocess.check_call(cmd, shell=True)
     except:
