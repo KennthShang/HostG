@@ -146,7 +146,7 @@ for i in range(file_id):
     contig_to_pred = pd.merge(name_list, prediction, on='idx')
     contig_to_pred.to_csv("pred/contig_"+str(i)+".csv", index = None)
 
-    cmd = "rm name_list.csv prediction.csv"
+    cmd = "rm name_list.csv"
     out = subprocess.check_call(cmd, shell=True)
 
     cmd = "rm tmp_pred/*"
