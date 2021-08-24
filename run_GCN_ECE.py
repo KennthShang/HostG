@@ -185,11 +185,11 @@ def GCN(taxa):
         for idx, node in id2node.items():
             if "cherry" in node:
                 if labels[idx] != -1:
-                    _ = f_out.write(node + "," + int2label[labels[idx]] + "\n")
+                    _ = f_out.write(node + "," + str(int2label[labels[idx]]) + "\n")
                     #print(node + "," + int2label[labels[idx]])
                 else:
                     if max(softmax(out[idx])) > args.t:
-                        _ = f_out.write(node + "," + int2label[pred[idx]] + "\n")
+                        _ = f_out.write(node + "," + str(int2label[pred[idx]]) + "\n")
                         #print(node + "," + int2label[pred[idx]])
 
 
