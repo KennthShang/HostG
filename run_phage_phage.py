@@ -101,28 +101,11 @@ def return_protien(contig):
     sorted_list = [item for item in sorted_list if len(item) > 10 ]
     return sorted_list
 
-
 file_list = os.listdir(file_in_fn)
 for file in file_list:
-    old_file_name = file.rsplit(".", 1)[0]
-    contig_id = int(old_file_name.split("_")[-1])
-    label_id = int(old_file_name.split("_")[1])
-    for record in SeqIO.parse(file_in_fn+file, "fasta"):
-        protein_record = []
-        contig = str(record.seq)
-        # conver into protein
-        frame1 = return_protien(contig)
-        frame2 = return_protien(contig[1:])
-        frame3 = return_protien(contig[2:])
-        rev_contig = Bio.Seq.reverse_complement(contig)
-        frame4 = return_protien(rev_contig)
-        frame5 = return_protien(rev_contig[1:])
-        frame6 = return_protien(rev_contig[2:])
-        proteins = np.concatenate([frame1, frame2, frame3, frame4, frame5, frame6])
-        for i in range(len(proteins)):
-            rec = SeqRecord(Seq(proteins[i]), id="cherry_"+str(label_id)+ "_" + str(contig_id) + "_" + str(i), description="")
-            protein_record.append(rec)
-        _ = SeqIO.write(protein_record, file_out_fnn+file, "fasta")
+    prodigal_cmd = 'prodigal -i ' + file_in_fn + file + ' -a '+ file_out_fnn + file +' -f gff -p meta'
+    print("Running prodigal...")
+    _ = subprocess.check_call(prodigal_cmd, shell=True)
 
 all_protein_f = out_fn + "all_proteins.fa"
 _ = subprocess.check_call("cat {0} {1} > {2}".format(file_out_fnn+"*", "dataset/protein.fasta", all_protein_f), shell=True)
