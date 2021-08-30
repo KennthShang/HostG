@@ -14,6 +14,7 @@ HostG is a GCN based model, which can learn the species masking feature via deep
 * [Diamond](https://github.com/bbuchfink/diamond)
 * BLAST
 * MCL
+* [Prodigal](https://github.com/hyattpd/Prodigal)
 
 All these packages can be installed using Anaconda.
 
