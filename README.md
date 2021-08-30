@@ -47,7 +47,7 @@ We also describe and evaluate the extension ability in the paper [See references
 # Format of the file
 
 1. The format of the input file should be a fasta file. Since the script will pass contigs with non-ACGT characters, which means those non-ACGT contigs will be remained unpredict.
-2. The format of the output file is a csv file which contain the prediction of each phage. *contig_name* is the accession from the input. *idx* is the temporary 
+2. The format of the output file is a csv file which contain the prediction of each phage. *contig_name* is the accession from the input. *idx* is the temporary name used in HostG 
 
 ![image](https://user-images.githubusercontent.com/22445402/131282066-e8c9743f-2b56-431e-84d3-cecca893aea1.png)
 
