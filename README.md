@@ -44,6 +44,19 @@ All the bacteria genomes can be downloaded using the `datasets` binary. The guid
 We also describe and evaluate the extension ability in the paper [See references section]. If you want to extend the database, please follow the same format and upload your genomes into to *bacteria* folder. Also you need to update the **label.csv** in the *dataset* folder according to your new genomes. 
 
 
+# Training on your new dataset
+If you have new phage-host interactions and you want to train HostG on them. There are several steps you need to follow:
+1. Add your phages into both **nucl.fasta** and **protein.fasta** file in *dataset* folder.
+2. You need to generate the `gene_to_genome.csv` file about your new phages. The format is shown as below. You need to specify which phage (*contig_id*) the protein (*protein_id*) belongs to. If you do not know the keywords of the protein, you can use "hypothetical protein" instead. This will **NOT** influent the results of HostG. Then you should add all the information this new `gene_to_genomes.csv` into our `dataset_gene_to_genomes.csv`.
+![image](https://user-images.githubusercontent.com/22445402/131283164-6f67621c-3d40-4647-a0d1-4d2fd820ab15.png)
+4. Add your host genomes in *bacteria*.
+5. Add both labels for phages and hosts into **label.csv**
+
+Then, we you predict for other contigs, HostG will integrate these new informations for prediction.
+
+
+
+
 # Format of the file
 
 1. The format of the input file should be a fasta file. Since the script will pass contigs with non-ACGT characters, which means those non-ACGT contigs will be remained unpredict.
