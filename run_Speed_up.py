@@ -156,3 +156,11 @@ for i in range(file_id):
 cmd = "cat pred/* > final_prediction.csv"
 out = subprocess.check_call(cmd, shell=True)
 
+
+cmd = "python run_check_consistency.py"
+try:
+    out = subprocess.check_call(cmd, shell=True)
+except:
+    print("check consistency error")
+    
+print("Thanks for using HostG. The final results are final_prediction_consistency.csv and final_prediction.csv")
