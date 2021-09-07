@@ -38,7 +38,11 @@ The output file is **final_prediction.csv**. There are several column in this cs
 # Database Extension
 Since the limitation of storage on GitHub, we only upload part of bacteria genomes in *bacteria* folder. Information about these bacteria can be found in **database.csv** in the *dataset* folder. Thus, the model can only predict the reported labels for phages. 
 
+
 All the bacteria genomes can be downloaded using the `datasets` binary. The guideline is on [NCBI datasets](https://www.ncbi.nlm.nih.gov/datasets/docs/quickstarts/command-line-tools/). Once you installed it on your systems, you can directly download the genomes by the given **All prokaryote.csv** file in *dataset* folder. remember to add the labels (Given in **All prokaryote.csv**) to **label.csv** to ensure the model can gain new labels from you downloaded dataset.
+
+
+**Note** If you do not know the taxonomy, you use can use this [link](https://github.com/KennthShang/PYlogeny) to generate a csv file by giving the accesion of the genomes. But be careful that you may not find all the taxonomy by using the script. Thus, you need to remove the unkown genomes to prevent some potential error.
 
 
 We also describe and evaluate the extension ability in the paper [See references section]. If you want to extend the database, please follow the same format and upload your genomes into to *bacteria* folder. Also you need to update the **label.csv** in the *dataset* folder according to your new genomes. 
