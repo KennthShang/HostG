@@ -68,7 +68,7 @@ Then, we you predict for other contigs, HostG will integrate these new informati
 
 ![image](https://user-images.githubusercontent.com/22445402/131282066-e8c9743f-2b56-431e-84d3-cecca893aea1.png)
 
-
+** Note ** Because HostG run on each taxonomy iteratively, there might exist some consistency problem for the prediction at each taxa level. We supply a script to make sure the prediction is consistent to NCBI taxonomy tree. Thus, there will be two output files: final_prediction_consistency.csv and final_prediction.csv (raw output). This is because some of the user might want to use the taxonomy from GTDB. User can replace the `label.csv` in dataset folder with GTDB taxonomies and use the raw output as the prediction.
 
 
 # References
