@@ -41,6 +41,7 @@ Since the limitation of storage on GitHub, we only upload part of bacteria genom
 
 All the bacteria genomes can be downloaded using the `datasets` binary. The guideline is on [NCBI datasets](https://www.ncbi.nlm.nih.gov/datasets/docs/quickstarts/command-line-tools/). Once you installed it on your systems, you can directly download the genomes by the given **All prokaryote.csv** file in *dataset* folder. remember to add the labels (Given in **All prokaryote.csv**) to **label.csv** to ensure the model can gain new labels from you downloaded dataset.
 
+If you perfer a website-based to download all the genomes, you can try to upload all the accession in **All prokaryote.csv** to [NCBI batchentrez](https://www.ncbi.nlm.nih.gov/sites/batchentrez)
 
 **Note** If you do not know the taxonomy, you use can use this [link](https://github.com/KennthShang/PYlogeny) to generate a csv file by giving the accesion of the genomes. But be careful that you may not find all the taxonomy by using the script. Thus, you need to remove the unkown genomes to prevent some potential error.
 
