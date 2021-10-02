@@ -38,7 +38,7 @@ cd ..
 # Usage (example)
 Here we present an example to show how to run HostG. We support a file named "contigs.fa" in the Github folder and it contain contigs simulated from E. coli phage. The only command that you need to run is `python run_Speed_up.py --contigs test_contigs.fa --len 8000 --t [confidence(SoftMax value)]`. 
 
-There are three parameters for the program: 1. `--contigs` is the path of your contigs file. 2. `--len` is the minimum length of the viral contigs that will be processed. The default length is 8000bp. 3. `--t `. This will output predictions only the confidence (SoftMax value) is larger than the threshold.  Both `--len` and '--t' are cutoffs decided by users. As shown in the paper, if you prefer higher accuracy, you can specify bigger values for len and t so that only the contigs longer than len and have confidence > t will be output.
+There are three parameters for the program: 1. `--contigs` is the path of your contigs file. 2. `--len` is the minimum length of the viral contigs that will be processed. The default length is 8000bp. 3. `--t `. This will output predictions only the confidence (SoftMax value) is larger than the threshold (from 0 to 1, default 0).  Both `--len` and '--t' are cutoffs decided by users. As shown in the paper, if you prefer higher accuracy, you can specify bigger values for len and t so that only the contigs longer than len and have confidence > t will be output.
 
 The output file is **final_prediction.csv**. There are several column in this csv file: "contig_name, median_file_name, [taxa]".
 
