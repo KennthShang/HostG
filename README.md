@@ -92,6 +92,8 @@ If you have any questions, please email us: jyshang2-c@my.cityu.edu.hk
 
 
 ## Notes
-if the program output an error (which is caused by your machine):
+1. if the program output an error (which is caused by your machine):
 `Error: mkl-service + Intel(R) MKL: MKL_THREADING_LAYER=INTEL is incompatible with libgomp.so.1 library.`
 You can type in the command `export MKL_SERVICE_FORCE_INTEL=1` before runing *run_Speed_up.py*
+
+2. The database of HostG is updated by adding all virus-host interactions released before 2020 for training.
