@@ -27,6 +27,13 @@ We recommend you to install all the package with [Anaconda](https://anaconda.org
 
 After cloning this respository, you can use anaconda to install the **HostG.yaml**. This will install all packages you need with gpu mode (make sure you have installed cuda on your system to use the gpu version. Othervise, it will run with cpu version). The command is: `conda env create -f environment.yaml`
 
+# Prepare the dataset
+```
+cd dataset
+bzip2 -d protein.fasta.bz2
+bzip2 -d nucl.fasta.bz2
+cd ..
+```
 
 # Usage (example)
 Here we present an example to show how to run HostG. We support a file named "contigs.fa" in the Github folder and it contain contigs simulated from E. coli phage. The only command that you need to run is `python run_Speed_up.py --contigs test_contigs.fa --len 8000 --t [confidence(SoftMax value)]`. 
