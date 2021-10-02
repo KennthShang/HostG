@@ -3,5 +3,7 @@
 The classification information has been updated according to NCBI information in July 2020.
 It contains 31,918 prokaryotic genomes and 1,426 virus-host interactions.
 
+`TEST_PAIR_TAX.xls` is the test dataset used in this paper. It was collected in February 2019
+It contains 60,105 prokaryotic genomes and 671 virus-host interactions. 
 
 `PRJNA492716_dataset.xls` contains 139 interactions in the NCBI PRJNA492716 project ([https://doi.org/10.1038/s41564-019-0526-2](https://doi.org/10.1038/s41564-019-0526-2)).
