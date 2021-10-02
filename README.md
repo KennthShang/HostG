@@ -19,13 +19,16 @@ HostG is a GCN based model, which can learn the species masking feature via deep
 All these packages can be installed using Anaconda.
 
 If you want to use the gpu to accelerate the program:
-* cuda 10.1 
+* cuda
 * Pytorch-gpu
 
 ## An easiler way to install
 We recommend you to install all the package with [Anaconda](https://anaconda.org/)
 
 After cloning this respository, you can use anaconda to install the **HostG.yaml**. This will install all packages you need with gpu mode (make sure you have installed cuda on your system to use the gpu version. Othervise, it will run with cpu version). The command is: `conda env create -f HostG.yaml`
+
+* For cpu version pytorch: `conda install pytorch torchvision torchaudio cpuonly -c pytorch`
+* For gpu version pytorch: Search [pytorch](https://pytorch.org/) to find the correct cuda version according to your computer
 
 # Prepare the dataset
 ```
