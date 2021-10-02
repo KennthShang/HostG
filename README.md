@@ -32,7 +32,8 @@ After cloning this respository, you can use anaconda to install the **HostG.yaml
 
 # Prepare the database
 ```
-cd dataset
+git clone https://github.com/KennthShang/HostG.git
+cd HostG/dataset
 bzip2 -d protein.fasta.bz2
 bzip2 -d nucl.fasta.bz2
 cd ..
