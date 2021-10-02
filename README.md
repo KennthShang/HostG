@@ -25,7 +25,7 @@ If you want to use the gpu to accelerate the program:
 ## An easiler way to install
 We recommend you to install all the package with [Anaconda](https://anaconda.org/)
 
-After cloning this respository, you can use anaconda to install the **HostG.yaml**. This will install all packages you need with gpu mode (make sure you have installed cuda on your system to use the gpu version. Othervise, it will run with cpu version). The command is: `conda env create -f environment.yaml`
+After cloning this respository, you can use anaconda to install the **HostG.yaml**. This will install all packages you need with gpu mode (make sure you have installed cuda on your system to use the gpu version. Othervise, it will run with cpu version). The command is: `conda env create -f HostG.yaml`
 
 # Prepare the dataset
 ```
