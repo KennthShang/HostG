@@ -30,7 +30,7 @@ After cloning this respository, you can use anaconda to install the **HostG.yaml
 * For cpu version pytorch: `conda install pytorch torchvision torchaudio cpuonly -c pytorch`
 * For gpu version pytorch: Search [pytorch](https://pytorch.org/) to find the correct cuda version according to your computer
 
-# Prepare the dataset
+# Prepare the database
 ```
 cd dataset
 bzip2 -d protein.fasta.bz2
