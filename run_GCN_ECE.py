@@ -43,7 +43,7 @@ def GCN(taxa):
     idx_test   = pkl.load(open("GCN_data/"+taxa+"_contig.test_id",'rb'))
 
 
-    idx_test = np.array(idx_test)
+    idx_test = np.array(idx_test, dtype=np.int64)
     labels = np.array(labels)
     y_train = np.zeros(labels.shape)
     y_test = np.zeros(labels.shape)
