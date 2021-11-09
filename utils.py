@@ -192,7 +192,7 @@ def masked_ECE(out, train_label, train_mask):
     pred = torch.argmax(out, 1)
     # calculate box
     for i in range(len(prob)):
-        if test_mask[i] == True:
+        if train_mask[i] == True:
             if prob[i] > 0.9:
                 try:
                     prob_box[9].append(prob[i])
