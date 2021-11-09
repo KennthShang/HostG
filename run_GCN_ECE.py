@@ -139,7 +139,7 @@ def GCN(taxa):
         # forward pass
         out = net((feature, support))
         loss = masked_loss(out, train_label, train_mask)
-        loss += masked_ECE(out, train_label, train_mask)
+        #loss += masked_ECE(out, train_label, train_mask)
         loss += args.weight_decay * net.l2_loss()
         # backward pass
         optimizer.zero_grad()
