@@ -8,7 +8,7 @@ HostG is a GCN based model, which can learn the species masking feature via deep
 # Required Dependencies
 * Python 3.x
 * Numpy
-* Pytorch
+* Pytorch-1.9.0
 * Networkx
 * Pandas
 * [Diamond](https://github.com/bbuchfink/diamond)
