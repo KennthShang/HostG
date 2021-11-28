@@ -84,7 +84,7 @@ Then, we you predict for other contigs, HostG will integrate these new informati
 
 
 # References
-The pre-print version is avaliable on https://arxiv.org/abs/2105.13570
+The paper is publised on BMC Biology: https://bmcbiol.biomedcentral.com/articles/10.1186/s12915-021-01180-4
 
 
 ## Contact
