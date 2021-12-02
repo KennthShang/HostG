@@ -173,6 +173,7 @@ def GCN(taxa):
         out = out.detach().numpy()
 
     pred = np.argmax(out, axis = 1)
+    score = np.max(out, axis = 1)
 
 
     label2int   = pkl.load(open("GCN_data/"+taxa+"_label2int.dict",'rb'))
@@ -181,15 +182,15 @@ def GCN(taxa):
     int2label ={idx: label for label, idx in label2int.items()}
 
     with open("tmp_pred/prediction_"+taxa+".csv", 'w') as f_out:
-        _ = f_out.write("contig_names,"+ taxa +"\n")
+        _ = f_out.write("contig_names,"+ taxa + "," + taxa + "_score" +"\n")
         for idx, node in id2node.items():
             if "cherry" in node:
                 if labels[idx] != -1:
-                    _ = f_out.write(node + "," + str(int2label[labels[idx]]) + "\n")
+                    _ = f_out.write(node + "," + str(int2label[labels[idx]])+ ",1" + "\n")
                     #print(node + "," + int2label[labels[idx]])
                 else:
                     if max(softmax(out[idx])) > args.t:
-                        _ = f_out.write(node + "," + str(int2label[pred[idx]]) + "\n")
+                        _ = f_out.write(node + "," + str(int2label[pred[idx]])+ "," + score[idx] + "\n")
                         #print(node + "," + int2label[pred[idx]])
 
 
