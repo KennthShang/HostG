@@ -97,4 +97,4 @@ If you have any questions, please email us: jyshang2-c@my.cityu.edu.hk
 You can type in the command `export MKL_SERVICE_FORCE_INTEL=1` before runing *run_Speed_up.py*
 
 2. The database of HostG is updated by adding all virus-host interactions mentioned in the paper for training.
-3. If the program output an error like "RuntimeError: Params.pkl is a zip archive (did you mean to use torch.jit.load()?)", please re-install the pytorch=1.9 according to your cuda version or use the cpu version
+3. If the program output an error like "RuntimeError: Params.pkl is a zip archive (did you mean to use torch.jit.load()?)", please re-install the pytorch according to your cuda version or use the cpu version
