@@ -167,6 +167,7 @@ def GCN(taxa):
 
     net.eval()
     out = net((feature, support))
+    out = F.softmax(out,dim =1)
     if torch.cuda.is_available():
         out = out.cpu().detach().numpy()
     else:
