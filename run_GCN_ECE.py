@@ -190,7 +190,7 @@ def GCN(taxa):
                     #print(node + "," + int2label[labels[idx]])
                 else:
                     if max(softmax(out[idx])) > args.t:
-                        _ = f_out.write(node + "," + str(int2label[pred[idx]])+ "," + score[idx] + "\n")
+                        _ = f_out.write(node + "," + str(int2label[pred[idx]])+ "," + str(score[idx]) + "\n")
                         #print(node + "," + int2label[pred[idx]])
 
 
