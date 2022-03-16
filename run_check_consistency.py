@@ -43,15 +43,11 @@ for phy, cla, orde, fam, gen in zip(Phylum, Class, Order, Family, Genus):
         if orde != return_taxa_label('order', fam):
             if cla != return_taxa_label('class', orde):
                 if phy != return_taxa_label('phylum', cla):
-                    print(return_taxa_label('phylum', cla))
-                    print(phy)
-                    break
                     new_Phylum.append(phy)
                     new_Class.append('-')
                     new_Order.append('-')
                     new_Family.append('-')
                     new_Genus.append('-')
-                    continue
                 else:
                     new_Phylum.append(phy)
                     new_Class.append(cla)
