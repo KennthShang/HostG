@@ -37,41 +37,38 @@ new_Order  = []
 new_Family = []
 new_Genus  = []
 
-
 for phy, cla, orde, fam, gen in zip(Phylum, Class, Order, Family, Genus):
-    if fam != return_taxa_label('family', str(gen)):
-        if orde != return_taxa_label('order', fam):
-            if cla != return_taxa_label('class', orde):
-                if phy != return_taxa_label('phylum', cla):
-                    new_Phylum.append(phy)
-                    new_Class.append('-')
-                    new_Order.append('-')
-                    new_Family.append('-')
-                    new_Genus.append('-')
-                else:
-                    new_Phylum.append(phy)
-                    new_Class.append(cla)
-                    new_Order.append('-')
-                    new_Family.append('-')
-                    new_Genus.append('-')
-            else:
-                new_Phylum.append(phy)
-                new_Class.append(cla)
-                new_Order.append(orde)
-                new_Family.append('-')
-                new_Genus.append('-')
-        else:
-            new_Phylum.append(phy)
-            new_Class.append(cla)
-            new_Order.append(orde)
-            new_Family.append(fam)
-            new_Genus.append('-')
+    if phy != return_taxa_label('phylum', str(cla)):
+        new_Phylum.append(phy)
+        new_Class.append('-')
+        new_Order.append('-')
+        new_Family.append('-')
+        new_Genus.append('-')
+    elif cla != return_taxa_label('class', str(orde)):
+        new_Phylum.append(phy)
+        new_Class.append(cla)
+        new_Order.append('-')
+        new_Family.append('-')
+        new_Genus.append('-')
+    elif orde != return_taxa_label('order', str(fam)):
+        new_Phylum.append(phy)
+        new_Class.append(cla)
+        new_Order.append(orde)
+        new_Family.append('-')
+        new_Genus.append('-')
+    elif fam != return_taxa_label('family', str(gen)):
+        new_Phylum.append(phy)
+        new_Class.append(cla)
+        new_Order.append(orde)
+        new_Family.append(fam)
+        new_Genus.append('-')
     else:
         new_Phylum.append(phy)
         new_Class.append(cla)
         new_Order.append(orde)
         new_Family.append(fam)
         new_Genus.append(gen)
+
 
 
 
