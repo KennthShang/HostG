@@ -1,9 +1,12 @@
 # HostG
 Graph convolutional neural network for host prediction
 
-
 HostG is a GCN based model, which can learn the species masking feature via deep learning classifier, for new phage host prediction. To use HostG, you only need to input your contigs to the program.
 
+
+
+## News !!!
+Our web server for phage-related tasks (including phage identification, taxonomy classification, lifestyle prediction, and host prediction) is available! You can visit PhaBOX to use the GUI. We also provided more detailed intermediate files and visualization for further analyzation. A stand-alone version of PhaBOX is also available via GitHub version, and you can run all these tools at once. Hope you will enjoy it!
 
 # Required Dependencies
 * Python 3.x
