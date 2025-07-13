@@ -1,16 +1,19 @@
-# HostG
+# ATTNETION!!!
+- The program has been updated and moved to [PhaBOX 2](https://github.com/KennthShang/PhaBOX), which is more user-friendly. In the new version, CHERRY is generalized to all kinds of viruses, more than just phages. In addition, the latest CHERRY allows you to use your MAGs as inputs and predict the interactions between your viruses and MAGs. Hope you will enjoy it. This folder will be no longer maintained. 
+
+- Our web server for viruses-related tasks (including virus identification, taxonomy classification, lifestyle prediction, host prediction, and protein annotation) is available! You can visit [Web Server](http://phage.ee.cityu.edu.hk/) to use the GUI. We also provided more detailed intermediate files and visualization for further analysis.
+
+
+
+
+## HostG
 Graph convolutional neural network for host prediction
 
 HostG is a GCN based model, which can learn the species masking feature via deep learning classifier, for new phage host prediction. To use HostG, you only need to input your contigs to the program.
 
 
 
-
-## News !!!
-Our web server for phage-related tasks (including phage identification, taxonomy classification, lifestyle prediction, and host prediction) is available! You can visit [PhaBOX](https://phage.ee.cityu.edu.hk/) to use the GUI. We also provided more detailed intermediate files and visualization for further analyzation. A stand-alone version of PhaBOX is also available via [GitHub version](https://github.com/KennthShang/PhaBOX), and you can run all these tools at once. Hope you will enjoy it!
-
-
-# Required Dependencies
+## Required Dependencies
 * Python 3.x
 * Numpy
 * Pytorch>1.6.0
